@@ -14,5 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('solid-state.index');
+})->name('home');
+
+Route::get('/generic', function () {
+    return view('solid-state.generic');
+})->name('generic');
+
+Route::get('/elements', function () {
+    return view('solid-state.elements');
+})->name('elements');
