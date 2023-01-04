@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PortfolioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +25,5 @@ Route::get('/generic', function () {
 Route::get('/elements', function () {
     return view('solid-state.elements');
 })->name('elements');
+
+Route::get('/portfolio', [PortfolioController::class, 'index']);
