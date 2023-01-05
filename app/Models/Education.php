@@ -9,6 +9,8 @@ class Education extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name'];
+
     /**
      * The table associated with the model.
      *

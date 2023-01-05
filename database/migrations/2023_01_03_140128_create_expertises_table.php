@@ -16,10 +16,11 @@ return new class extends Migration
         Schema::create('expertises', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('level');
+            $table->integer('level')->nullable();
             $table->string('short_description')->nullable();
             $table->string('logo')->nullable();
             $table->string('image')->nullable();
+            $table->string('url')->nullable();
             $table->timestamps();
         });
     }

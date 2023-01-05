@@ -9,6 +9,8 @@ class Employment extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name'];
+
     /**
      * get the associated descriptions
      */
