@@ -27,3 +27,5 @@ Route::get('/elements', function () {
 })->name('elements');
 
 Route::get('/portfolio', [PortfolioController::class, 'index']);
+
+Route::get('/setup', [PortfolioController::class, 'initialSetup']);
