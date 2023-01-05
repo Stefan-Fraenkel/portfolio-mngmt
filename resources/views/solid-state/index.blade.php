@@ -19,7 +19,7 @@
 
 				<!-- Header -->
 					<header id="header" class="alt">
-						<h1><a href="index.html">Solid State</a></h1>
+						<h1><a href="{{route('home')}}">Solid State</a></h1>
 						<nav>
 							<a href="#menu">Menu</a>
 						</nav>
@@ -43,9 +43,11 @@
 				<!-- Banner -->
 					<section id="banner">
 						<div class="inner">
-							<div class="logo"><span class="icon fa-gem"></span></div>
-							<h2>This is Solid State</h2>
-							<p>Another free + fully responsive site template by <a href="http://html5up.net">HTML5 UP</a></p>
+							<div class="logo">
+                                <img src="{{ asset('/images/avatar.jpg')}}" alt="" class="rounded-circle" style="width: 5rem; border-radius: 50%"/>
+                            </div>
+							<h2>Hallo, ich bin Stefan Fränkel</h2>
+							<p>Full Stack Developer</p>
 						</div>
 					</section>
 
