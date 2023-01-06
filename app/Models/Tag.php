@@ -41,4 +41,9 @@ class Tag extends Model
         return $this->belongsToMany(ProfileImage::class);
     }
 
+    public function hobbies()
+    {
+        return $this->belongsToMany(Hobby::class);
+    }
+
 }
