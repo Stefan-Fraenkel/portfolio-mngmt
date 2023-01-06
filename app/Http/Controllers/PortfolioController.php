@@ -26,7 +26,7 @@ class PortfolioController extends Controller
 {
     public function index()
     {
-        return view('solid-state.index');
+        return view('solid-state.index')->with('profile', Profile::first());
     }
 
     public function info()

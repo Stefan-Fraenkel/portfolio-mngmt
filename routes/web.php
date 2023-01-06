@@ -14,9 +14,7 @@ use App\Http\Controllers\PortfolioController;
 |
 */
 
-Route::get('/', function () {
-    return view('solid-state.index');
-})->name('home');
+Route::get('/', [PortfolioController::class, 'index'])->name('home');
 
 Route::get('/generic', function () {
     return view('solid-state.generic');
@@ -26,6 +24,8 @@ Route::get('/elements', function () {
     return view('solid-state.elements');
 })->name('elements');
 
-Route::get('/portfolio', [PortfolioController::class, 'index']);
+Route::get('/portfolio', [PortfolioController::class, 'info'])->name('portfolio');
 
-Route::get('/setup', [PortfolioController::class, 'initialSetup']);
+Route::post('/send_mail', [PortfolioController::class, 'sendMail'])->name('send_mail');
+
+Route::get('/setup', [PortfolioController::class, 'initialSetup'])->name('update_portfolio');
