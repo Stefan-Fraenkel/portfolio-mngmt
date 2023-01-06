@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('logo')->nullable();
             $table->string('image')->nullable();
             $table->string('url')->nullable();
+            $table->string('certificate')->nullable();
             $table->timestamps();
         });
     }

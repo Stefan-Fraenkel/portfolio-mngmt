@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('url')->nullable();
             $table->date('from')->nullable();
             $table->date('to')->nullable();
+            $table->string('certificate')->nullable();
             $table->timestamps();
         });
     }
