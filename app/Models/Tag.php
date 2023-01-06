@@ -35,4 +35,10 @@ class Tag extends Model
     {
         return $this->belongsToMany(Training::class);
     }
+
+    public function profile_images()
+    {
+        return $this->belongsToMany(ProfileImage::class);
+    }
+
 }
