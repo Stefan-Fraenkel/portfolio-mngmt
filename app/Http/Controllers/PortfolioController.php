@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Hobby;
+use App\Models\Reference;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Education;
@@ -15,6 +17,8 @@ use App\Models\ProjectDescription;
 use App\Models\Training;
 use App\Models\TrainingDescription;
 use App\Models\Tag;
+use App\Models\Profile;
+use App\Models\ProfileImage;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -42,6 +46,11 @@ class PortfolioController extends Controller
                 }
             }
         }
+    }
+
+    public function sendMail(Request $request)
+    {
+        dd($request);
     }
 
     public function addDescription($object, $array)
@@ -103,6 +112,15 @@ class PortfolioController extends Controller
                 break;
             case 'tags':
                 $class = Tag::class;
+                break;
+            case 'profiles':
+                $class = Profile::class;
+                break;
+            case 'references':
+                $class = Reference::class;
+                break;
+            case 'hobbies':
+                $class = Hobby::class;
                 break;
             default:
                 return false;
