@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('employment_reference', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('employment_id')->constrained('projects');
+            $table->foreignId('employment_id')->constrained('employments');
             $table->foreignId('reference_id')->constrained('references');
             $table->timestamps();
         });
