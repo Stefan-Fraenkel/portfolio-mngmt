@@ -20,6 +20,14 @@ class Employment extends Model
     }
 
     /**
+     * get the associated references
+     */
+    public function references()
+    {
+        return $this->belongsToMany(Reference::class);
+    }
+
+    /**
      * get the associated tags
      */
     public function tags()
