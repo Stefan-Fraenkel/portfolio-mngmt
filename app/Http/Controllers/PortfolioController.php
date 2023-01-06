@@ -26,6 +26,11 @@ class PortfolioController extends Controller
 {
     public function index()
     {
+        return view('solid-state.index');
+    }
+
+    public function info()
+    {
         $infos = [
             'educations' => Education::all(),
             'employments' => Employment::all(),
