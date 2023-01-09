@@ -16,10 +16,12 @@ return new class extends Migration
         Schema::create('trainings', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->boolean('advertise')->default(0);
             $table->string('institution')->nullable();
             $table->string('short_description')->nullable();
             $table->string('logo')->nullable();
-            $table->string('image')->nullable();
+            $table->longText('image')->nullable();
+            $table->string('image_identifier')->nullable();
             $table->string('url')->nullable();
             $table->date('from')->nullable();
             $table->date('to')->nullable();

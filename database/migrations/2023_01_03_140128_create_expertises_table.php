@@ -17,9 +17,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->integer('level')->nullable();
+            $table->boolean('advertise')->default(0);
             $table->string('short_description')->nullable();
             $table->string('logo')->nullable();
-            $table->string('image')->nullable();
+            $table->longText('image')->nullable();
+            $table->string('image_identifier')->nullable();
             $table->string('url')->nullable();
             $table->string('certificate')->nullable();
             $table->timestamps();

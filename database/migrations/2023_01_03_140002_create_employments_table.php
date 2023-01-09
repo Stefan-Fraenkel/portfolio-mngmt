@@ -16,11 +16,13 @@ return new class extends Migration
         Schema::create('employments', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->boolean('advertise')->default(0);
             $table->string('employer')->nullable();
             $table->string('short_description')->nullable();
             $table->string('location')->nullable();
             $table->string('logo')->nullable();
-            $table->string('image')->nullable();
+            $table->longText('image')->nullable();
+            $table->string('image_identifier')->nullable();
             $table->string('url')->nullable();
             $table->date('from')->nullable();
             $table->date('to')->nullable();

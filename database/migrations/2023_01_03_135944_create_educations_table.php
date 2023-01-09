@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('short_description')->nullable();
             $table->string('location')->nullable();
             $table->string('logo')->nullable();
-            $table->string('image')->nullable();
+            $table->longText('image')->nullable();
+            $table->string('image_identifier')->nullable();
             $table->string('url')->nullable();
             $table->date('from')->nullable();
             $table->date('to')->nullable();

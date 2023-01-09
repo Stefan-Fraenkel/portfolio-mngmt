@@ -21,7 +21,8 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('quote')->nullable();
             $table->string('logo')->nullable();
-            $table->string('image')->nullable();
+            $table->longText('image')->nullable();
+            $table->string('image_identifier')->nullable();
             $table->timestamps();
         });
     }
