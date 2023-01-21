@@ -29,6 +29,45 @@ class PortfolioController extends Controller
         return view('solid-state.index')->with('profile', Profile::first());
     }
 
+    private function formatDescription($collection)
+    {
+        foreach ($collection as $object)
+        {
+            $items = explode(' - ', $object->short_description);
+            $i=0;
+            foreach ($items as $item)
+            {
+                if ($i === 0)
+                {
+                    $object->short_description = $item;
+                }
+                else $object->short_description .= '<br>'.$item;
+                $i++;
+            }
+        }
+        return $collection;
+    }
+    public function cv()
+    {
+        $projects = Project::all()->where('id', 3)->take(1)->values(); // get max 4 entries to not clutter layout
+        echo '';
+      //  echo        base64_decode($projects[0]->image);
+
+        $profile = Profile::first();
+        $profile->description = str_replace(' - ','&nbsp | &nbsp',$profile->description);
+        $employments = Employment::all()->where('advertise', true)->take(3); // get max 3 entries to fit with template
+        $employments = $this->formatDescription($employments);
+        $projects = Project::all()->where('advertise', true)->take(4)->values(); // get max 4 entries to not clutter layout
+        $projects = $this->formatDescription($projects);
+
+        return view('solid-state.cv')
+            ->with('profile', $profile)
+            ->with('trainings', Training::all()->where('advertise', true)->take(3)->values()) // get max 3 entries to not clutter layout
+            ->with('expertises', Expertise::all()->where('advertise', true)->take(5)->values()) // get max 5 entries to not clutter layout
+            ->with('employments', $employments->values()) // ->values() to reset collection keys
+            ->with('projects', $projects->values());
+    }
+
     public function info()
     {
         $infos = [
@@ -135,6 +174,14 @@ class PortfolioController extends Controller
             $row = $class::firstOrCreate(['name' => $element['name']]);
             foreach ($element as $key => $value)
             {
+                if ($value === 'TRUE')
+                {
+                    $value = true;
+                }
+                if ($value === 'FALSE')
+                {
+                    $value = false;
+                }
                 if ($key == 'from' || $key == 'to')
                 {
                     if (isset($value) && $value != null)
