@@ -31,10 +31,10 @@
             <h2>Menu</h2>
             <ul class="links">
                 <li><a href={{route('home')}}>Startseite</a></li>
-                <li><a href={{route('generic')}}>Unterseite</a></li>
-                <li><a href={{route('elements')}}>Elemente</a></li>
-                <li><a href={{route('portfolio')}}>Lebenslauf</a></li>
-                <li><a href={{route('update_portfolio')}}>Lebenslauf aktualisieren</a></li>
+                <li><a href={{route('cv')}}>Lebenslauf</a></li>
+                <li><a href={{route('employments')}}>Berufe</a></li>
+                <li><a href={{route('skills')}}>Kenntnisse</a></li>
+                <li><a href={{route('projects')}}>Projekte</a></li>
             </ul>
             <a href="#" class="close">Schließen</a>
         </div>
@@ -42,12 +42,15 @@
 
     <!-- Banner -->
     <section id="banner">
+
         <div class="inner">
+            <!-- <div class="logo"><span class="icon fa-gem"></span></div> -->
             <div class="logo">
-                <img src="{{ asset('/images/avatar.jpg')}}" alt="" class="image" style="width: 20rem;"/>
+                <img src="{{ asset('/images/avatar.jpg')}}" alt="" class="rounded-circle" style="width: 20rem; border-radius: 50%"/>
+                <!-- <img src="{{ asset('/images/avatar.jpg')}}" alt="" class="image" style="width: 20rem;"/> -->
             </div>
             <h2>Hallo, ich bin {{$profile->name}}</h2>
-            <p>{{$profile->description}}</p>
+            <p>{!!$profile->description!!}</p>
         </div>
     </section>
 
@@ -55,74 +58,87 @@
     <section id="wrapper">
 
         <!-- One -->
-        <section id="one" class="wrapper spotlight style1">
-            <div class="inner">
-                <a href="#" class="image"><img src="{{ asset('/images/pic01.jpg')}}" alt="" /></a>
-                <div class="content">
-                    <h2 class="major">Magna arcu feugiat</h2>
-                    <p>Lorem ipsum dolor sit amet, etiam lorem adipiscing elit. Cras turpis ante, nullam sit amet turpis non, sollicitudin posuere urna. Mauris id tellus arcu. Nunc vehicula id nulla dignissim dapibus. Nullam ultrices, neque et faucibus viverra, ex nulla cursus.</p>
-                    <a href="#" class="special">mehr erfahren</a>
+        @isset($employments[0])
+            <section id="one" class="wrapper spotlight style1">
+                <div class="inner">
+                    <a href="{{$employments[0]->url}}" class="image" target="_blank"><img src="{{ asset('/images/forsberg_logo_small.jpeg')}}" alt="" /></a>
+                    <div class="content">
+                        <h2 class="major">{{$employments[0]->name}}</h2>
+                        <p>{!!$employments[0]->short_description!!}</p>
+                        <a href="{{route('employments')}}" class="special"  target="_blank">mehr erfahren</a>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        @endisset
 
         <!-- Two -->
-        <section id="two" class="wrapper alt spotlight style2">
-            <div class="inner">
-                <a href="#" class="image"><img src={{ asset('/images/pic02.jpg') }} alt="" /></a>
-                <div class="content">
-                    <h2 class="major">Tempus adipiscing</h2>
-                    <p>Lorem ipsum dolor sit amet, etiam lorem adipiscing elit. Cras turpis ante, nullam sit amet turpis non, sollicitudin posuere urna. Mauris id tellus arcu. Nunc vehicula id nulla dignissim dapibus. Nullam ultrices, neque et faucibus viverra, ex nulla cursus.</p>
-                    <a href="#" class="special">mehr erfahren</a>
+        @isset($employments[1])
+            <section id="two" class="wrapper alt spotlight style2">
+                <div class="inner">
+                    <!-- <a href="{{$employments[1]->url}}" class="image"><img src="{{ asset('/images/fff_logo_small.png')}}" alt="" /></a> -->
+                    <a href="{{$employments[1]->url}}" class="image" target="_blank"><img src="{{ asset('/images/fff_logo_small.png') }}" alt="" /></a>
+                    <div class="content">
+                        <h2 class="major">{{$employments[1]->name}}</h2>
+                        <p>{!!$employments[1]->short_description!!}</p>
+                        <a href="{{route('employments')}}" class="special"  target="_blank">mehr erfahren</a>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        @endisset
 
         <!-- Three -->
-        <section id="three" class="wrapper spotlight style3">
-            <div class="inner">
-                <a href="#" class="image"><img src={{ asset('/images/pic03.jpg') }} alt="" /></a>
-                <div class="content">
-                    <h2 class="major">Nullam dignissim</h2>
-                    <p>Lorem ipsum dolor sit amet, etiam lorem adipiscing elit. Cras turpis ante, nullam sit amet turpis non, sollicitudin posuere urna. Mauris id tellus arcu. Nunc vehicula id nulla dignissim dapibus. Nullam ultrices, neque et faucibus viverra, ex nulla cursus.</p>
-                    <a href="#" class="special">mehr erfahren</a>
+        @isset($employments[2])
+            <section id="three" class="wrapper spotlight style3">
+                <div class="inner">
+                    <a href="{{$employments[2]->url}}" class="image" target="_blank"><img src="{{ asset('/images/gbm_logo_small.png') }}" alt="" /></a>
+                    <div class="content">
+                        <h2 class="major">{{$employments[2]->name}}</h2>
+                        <p>{!!$employments[2]->short_description!!}</p>
+                        <a href="{{route('employments')}}" class="special" target="_blank">mehr erfahren</a>
+                    </div>
                 </div>
+            </section>
+        @endisset
+
+        <!-- Banner -->
+        <section id="footer">
+
+            <div class="inner">
+                @isset($expertises)
+                    <h2 class="major">Skills</h2>
+                    <br>
+                    <section class="features">
+                        @foreach($expertises as $expertise)
+                            {{$expertise->name}}
+                            <div class="logo" id="myProgress" style="width: 100%; height: 3px; background-color: rgba(255,255,255,0.3)">
+                                <div class="skill-bar" style="width: 0%; height: 100%; background-color: white;" data-value="{{$expertise->level}}"></div>
+                            </div>
+                            <br>
+                        @endforeach
+                    </section>
+                    <ul class="actions">
+                        <li><a href="{{route('skills')}}" class="button">Alle ansehen</a></li>
+                    </ul>
+                @endisset
             </div>
         </section>
-
         <!-- Four -->
         <section id="four" class="wrapper alt style1">
             <div class="inner">
-                <h2 class="major">Vitae phasellus</h2>
-                <p>Cras mattis ante fermentum, malesuada neque vitae, eleifend erat. Phasellus non pulvinar erat. Fusce tincidunt, nisl eget mattis egestas, purus ipsum consequat orci, sit amet lobortis lorem lacus in tellus. Sed ac elementum arcu. Quisque placerat auctor laoreet.</p>
+                <h2 class="major">Projekte</h2>
+                <p>Bei meiner professionellen Arbeit handelt es sich in der Regel um proprietären Code, welcher der Geheimhaltung unterliegt. Hier finden sich ausschließlich private Projekte, die uneingeschränkt betrachtet werden können.</p>
                 <section class="features">
-                    <article>
-                        <a href="#" class="image"><img src={{ asset('/images/pic04.jpg') }} alt="" /></a>
-                        <h3 class="major">Sed feugiat lorem</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing vehicula id nulla dignissim dapibus ultrices.</p>
-                        <a href="#" class="special">mehr erfahren</a>
-                    </article>
-                    <article>
-                        <a href="#" class="image"><img src={{ asset('/images/pic05.jpg') }} alt="" /></a>
-                        <h3 class="major">Nisl placerat</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing vehicula id nulla dignissim dapibus ultrices.</p>
-                        <a href="#" class="special">mehr erfahren</a>
-                    </article>
-                    <article>
-                        <a href="#" class="image"><img src={{ asset('/images/pic06.jpg') }} alt="" /></a>
-                        <h3 class="major">Ante fermentum</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing vehicula id nulla dignissim dapibus ultrices.</p>
-                        <a href="#" class="special">mehr erfahren</a>
-                    </article>
-                    <article>
-                        <a href="#" class="image"><img src={{ asset('/images/pic07.jpg') }} alt="" /></a>
-                        <h3 class="major">Fusce consequat</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing vehicula id nulla dignissim dapibus ultrices.</p>
-                        <a href="#" class="special">mehr erfahren</a>
-                    </article>
+                    @foreach($projects as $project)
+                        <article>
+                            <a href="#" class="image"><img src="data:image/png;base64,{{$project->image}}" alt="" /></a>
+                            <h3 class="major">{{$project->name}}</h3>
+                            <p>{!!$project->short_description!!}</p>
+                            <a href="{{$project->url}}" class="special" target="_blank">mehr erfahren</a>
+                        </article>
+                    @endforeach
                 </section>
                 <ul class="actions">
-                    <li><a href="#" class="button">Alle ansehen</a></li>
+                    <li><a href="{{route('projects')}}" class="button">Alle ansehen</a></li>
                 </ul>
             </div>
         </section>
@@ -180,6 +196,8 @@
 <script src={{ asset('/js/breakpoints.min.js') }}></script>
 <script src={{ asset('/js/util.js') }}></script>
 <script src={{ asset('/js/main.js') }}></script>
+<script src={{ asset('/js/helper_guy.js') }}></script>
+<script src={{ asset('/js/custom_animation.js') }}></script>
 
 </body>
 </html>
