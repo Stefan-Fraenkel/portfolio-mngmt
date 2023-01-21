@@ -15,6 +15,8 @@ use App\Http\Controllers\PortfolioController;
 */
 
 Route::get('/', [PortfolioController::class, 'index'])->name('home');
+Route::get('/cv', [PortfolioController::class, 'cv'])->name('cv');
+
 
 Route::get('/generic', function () {
     return view('solid-state.generic');
