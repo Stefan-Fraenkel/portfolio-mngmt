@@ -119,8 +119,6 @@
                     <ul class="actions">
                         <li><a href="#" class="button">Alle ansehen</a></li>
                     </ul>
-                    <br>
-                    <br>
                 @endisset
             </div>
         </section>
