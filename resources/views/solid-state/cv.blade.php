@@ -100,14 +100,14 @@
             </section>
         @endisset
 
+        <!-- Banner -->
+        <section id="footer">
 
-        <!-- Four -->
-        <section id="four" class="wrapper alt style1">
             <div class="inner">
                 @isset($expertises)
-                <h2 class="major">Skills</h2>
-                <br>
-                <section class="features">
+                    <h2 class="major">Skills</h2>
+                    <br>
+                    <section class="features">
                         @foreach($expertises as $expertise)
                             {{$expertise->name}}
                             <div class="logo" id="myProgress" style="width: 100%; height: 3px; background-color: rgba(255,255,255,0.3)">
@@ -115,14 +115,18 @@
                             </div>
                             <br>
                         @endforeach
-                </section>
-                <ul class="actions">
-                    <li><a href="#" class="button">Alle ansehen</a></li>
-                </ul>
+                    </section>
+                    <ul class="actions">
+                        <li><a href="#" class="button">Alle ansehen</a></li>
+                    </ul>
                     <br>
                     <br>
                 @endisset
-
+            </div>
+        </section>
+        <!-- Four -->
+        <section id="four" class="wrapper alt style1">
+            <div class="inner">
                 <h2 class="major">Projekte</h2>
                 <p>Bei meiner professionellen Arbeit handelt es sich in der Regel um proprietären Code, welcher der Geheimhaltung unterliegt. Hier finden sich ausschließlich private Projekte, die uneingeschränkt betrachtet werden können.</p>
                 <section class="features">
