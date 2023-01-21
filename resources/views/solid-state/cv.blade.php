@@ -65,7 +65,7 @@
                     <div class="content">
                         <h2 class="major">{{$employments[0]->name}}</h2>
                         <p>{!!$employments[0]->short_description!!}</p>
-                        <a href="{{$employments[0]->url}}" class="special"  target="_blank">mehr erfahren</a>
+                        <a href="{{route('employments')}}" class="special"  target="_blank">mehr erfahren</a>
                     </div>
                 </div>
             </section>
@@ -80,7 +80,7 @@
                     <div class="content">
                         <h2 class="major">{{$employments[1]->name}}</h2>
                         <p>{!!$employments[1]->short_description!!}</p>
-                        <a href="{{$employments[1]->url}}" class="special"  target="_blank">mehr erfahren</a>
+                        <a href="{{route('employments')}}" class="special"  target="_blank">mehr erfahren</a>
                     </div>
                 </div>
             </section>
@@ -94,7 +94,7 @@
                     <div class="content">
                         <h2 class="major">{{$employments[2]->name}}</h2>
                         <p>{!!$employments[2]->short_description!!}</p>
-                        <a href="{{$employments[2]->url}}" class="special" target="_blank">mehr erfahren</a>
+                        <a href="{{route('employments')}}" class="special" target="_blank">mehr erfahren</a>
                     </div>
                 </div>
             </section>
@@ -117,7 +117,7 @@
                         @endforeach
                     </section>
                     <ul class="actions">
-                        <li><a href="#" class="button">Alle ansehen</a></li>
+                        <li><a href="{{route('skills')}}" class="button">Alle ansehen</a></li>
                     </ul>
                 @endisset
             </div>
@@ -138,7 +138,7 @@
                     @endforeach
                 </section>
                 <ul class="actions">
-                    <li><a href="#" class="button">Alle ansehen</a></li>
+                    <li><a href="{{route('projects')}}" class="button">Alle ansehen</a></li>
                 </ul>
             </div>
         </section>
