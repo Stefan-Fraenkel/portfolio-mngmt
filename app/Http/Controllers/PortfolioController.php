@@ -26,7 +26,19 @@ class PortfolioController extends Controller
 {
     public function index()
     {
-        return view('solid-state.index')->with('profile', Profile::first());
+        $profile = Profile::first();
+        $profile->description = str_replace(' - ','&nbsp | &nbsp',$profile->description);
+        $employments = Employment::all()->where('advertise', true)->take(3); // get max 3 entries to fit with template
+        $employments = $this->formatDescription($employments);
+        $projects = Project::all()->where('advertise', true)->take(4)->values(); // get max 4 entries to not clutter layout
+        $projects = $this->formatDescription($projects);
+
+        return view('solid-state.index')
+            ->with('profile', $profile)
+            ->with('trainings', Training::all()->where('advertise', true)->take(3)->values()) // get max 3 entries to not clutter layout
+            ->with('expertises', Expertise::all()->where('advertise', true)->take(5)->values()) // get max 5 entries to not clutter layout
+            ->with('employments', $employments->values()) // ->values() to reset collection keys
+            ->with('projects', $projects->values());
     }
 
     private function formatDescription($collection)
@@ -49,10 +61,6 @@ class PortfolioController extends Controller
     }
     public function cv()
     {
-        $projects = Project::all()->where('id', 3)->take(1)->values(); // get max 4 entries to not clutter layout
-        echo '';
-      //  echo        base64_decode($projects[0]->image);
-
         $profile = Profile::first();
         $profile->description = str_replace(' - ','&nbsp | &nbsp',$profile->description);
         $employments = Employment::all()->where('advertise', true)->take(3); // get max 3 entries to fit with template
@@ -60,12 +68,44 @@ class PortfolioController extends Controller
         $projects = Project::all()->where('advertise', true)->take(4)->values(); // get max 4 entries to not clutter layout
         $projects = $this->formatDescription($projects);
 
-        return view('solid-state.cv')
+        return view('solid-state.index')
             ->with('profile', $profile)
             ->with('trainings', Training::all()->where('advertise', true)->take(3)->values()) // get max 3 entries to not clutter layout
             ->with('expertises', Expertise::all()->where('advertise', true)->take(5)->values()) // get max 5 entries to not clutter layout
             ->with('employments', $employments->values()) // ->values() to reset collection keys
             ->with('projects', $projects->values());
+    }
+
+    public function skills()
+    {
+        $profile = Profile::first();
+        $profile->description = str_replace(' - ','&nbsp | &nbsp',$profile->description);
+        return view('solid-state.skills')
+            ->with('profile', $profile)
+            ->with('expertises', Expertise::all()->values());
+    }
+
+    public function projects()
+    {
+        $profile = Profile::first();
+        $profile->description = str_replace(' - ','&nbsp | &nbsp',$profile->description);
+        $projects = Project::all()->values();
+        $projects = $this->formatDescription($projects);
+        return view('solid-state.projects')
+            ->with('profile', $profile)
+            ->with('projects', $projects->values());
+    }
+
+    public function employments()
+    {
+        $profile = Profile::first();
+        $profile->description = str_replace(' - ','&nbsp | &nbsp',$profile->description);
+        $employments = Employment::all();
+        $employments = $this->formatDescription($employments);
+
+        return view('solid-state.employments')
+            ->with('profile', $profile)
+            ->with('employments', $employments->values());
     }
 
     public function info()
