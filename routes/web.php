@@ -27,6 +27,9 @@ Route::get('/elements', function () {
 })->name('elements');
 
 Route::get('/portfolio', [PortfolioController::class, 'info'])->name('portfolio');
+Route::get('/skills', [PortfolioController::class, 'skills'])->name('skills');
+Route::get('/projects', [PortfolioController::class, 'projects'])->name('projects');
+Route::get('/employments', [PortfolioController::class, 'employments'])->name('employments');
 
 Route::post('/send_mail', [PortfolioController::class, 'sendMail'])->name('send_mail');
 
