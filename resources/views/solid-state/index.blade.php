@@ -57,48 +57,52 @@
     <!-- Wrapper -->
     <section id="wrapper">
 
-        <!-- One -->
-        @isset($employments[0])
-            <section id="one" class="wrapper spotlight style1">
+        @foreach($employments as $number => $employment)
+            @php
+                $number = $number+1;
+                $style = $number;
+                while ($style > 5) // styles count up to style6
+                    {
+                        $style = $style - 5;
+                    }
+            @endphp
+            @if($number % 2 == 0)
+                <section id="{{$number}}" class="wrapper alt spotlight style{{$style}}">
+            @else
+                <section id="{{$number}}" class="wrapper spotlight style{{$style}}">
+            @endif
                 <div class="inner">
-                    <a href="{{$employments[0]->url}}" class="image" target="_blank"><img src="{{ asset('/images/forsberg_logo_small.jpeg')}}" alt="" /></a>
+                    <a href="{{$employment->url}}" class="image" target="_blank"><img src="data:image/png;base64,{{$employment->image}}" alt="" /></a>
                     <div class="content">
-                        <h2 class="major">{{$employments[0]->name}}</h2>
-                        <p>{!!$employments[0]->short_description!!}</p>
-                        <a href="{{route('employments')}}" class="special"  target="_blank">mehr erfahren</a>
+                        <h2 class="major">{{$employment->name}}</h2>
+                        <div class="row">
+                            @if($number % 2 == 0)
+                                <div class="col-6 col-12-medium">
+                                    <ul class="alt">
+                                        @foreach($employment->short_descriptions as $short_description)
+                                            <li>{{$short_description}}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                <div class="col-6 col-12-medium">
+                                </div>
+                            @else
+                                <div class="col-6 col-12-medium">
+                                </div>
+                                <div class="col-6 col-12-medium">
+                                    <ul class="alt">
+                                        @foreach($employment->short_descriptions as $short_description)
+                                            <li>{{$short_description}}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                        </div>
+                        <a href="{{route('employments')}}" class="special">mehr erfahren</a>
                     </div>
                 </div>
             </section>
-        @endisset
-
-        <!-- Two -->
-        @isset($employments[1])
-            <section id="two" class="wrapper alt spotlight style2">
-                <div class="inner">
-                    <!-- <a href="{{$employments[1]->url}}" class="image"><img src="{{ asset('/images/fff_logo_small.png')}}" alt="" /></a> -->
-                    <a href="{{$employments[1]->url}}" class="image" target="_blank"><img src="{{ asset('/images/fff_logo_small.png') }}" alt="" /></a>
-                    <div class="content">
-                        <h2 class="major">{{$employments[1]->name}}</h2>
-                        <p>{!!$employments[1]->short_description!!}</p>
-                        <a href="{{route('employments')}}" class="special"  target="_blank">mehr erfahren</a>
-                    </div>
-                </div>
-            </section>
-        @endisset
-
-        <!-- Three -->
-        @isset($employments[2])
-            <section id="three" class="wrapper spotlight style3">
-                <div class="inner">
-                    <a href="{{$employments[2]->url}}" class="image" target="_blank"><img src="{{ asset('/images/gbm_logo_small.png') }}" alt="" /></a>
-                    <div class="content">
-                        <h2 class="major">{{$employments[2]->name}}</h2>
-                        <p>{!!$employments[2]->short_description!!}</p>
-                        <a href="{{route('employments')}}" class="special" target="_blank">mehr erfahren</a>
-                    </div>
-                </div>
-            </section>
-        @endisset
+        @endforeach
 
         <!-- Banner -->
         <section id="footer">
