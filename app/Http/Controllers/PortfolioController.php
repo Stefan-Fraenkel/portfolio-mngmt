@@ -46,34 +46,9 @@ class PortfolioController extends Controller
         foreach ($collection as $object)
         {
             $items = explode(' - ', $object->short_description);
-            $i=0;
-            foreach ($items as $item)
-            {
-                if ($i === 0)
-                {
-                    $object->short_description = $item;
-                }
-                else $object->short_description .= '<br>'.$item;
-                $i++;
-            }
+            $object->short_descriptions = $items;
         }
         return $collection;
-    }
-    public function cv()
-    {
-        $profile = Profile::first();
-        $profile->description = str_replace(' - ','&nbsp | &nbsp',$profile->description);
-        $employments = Employment::all()->where('advertise', true)->take(3); // get max 3 entries to fit with template
-        $employments = $this->formatDescription($employments);
-        $projects = Project::all()->where('advertise', true)->take(4)->values(); // get max 4 entries to not clutter layout
-        $projects = $this->formatDescription($projects);
-
-        return view('solid-state.index')
-            ->with('profile', $profile)
-            ->with('trainings', Training::all()->where('advertise', true)->take(3)->values()) // get max 3 entries to not clutter layout
-            ->with('expertises', Expertise::all()->where('advertise', true)->take(5)->values()) // get max 5 entries to not clutter layout
-            ->with('employments', $employments->values()) // ->values() to reset collection keys
-            ->with('projects', $projects->values());
     }
 
     public function skills()
@@ -100,7 +75,16 @@ class PortfolioController extends Controller
     {
         $profile = Profile::first();
         $profile->description = str_replace(' - ','&nbsp | &nbsp',$profile->description);
-        $employments = Employment::all();
+        $employments = Employment::all()->sortByDesc('from');
+        foreach ($employments as $employment)
+        {
+            $employment->from = Carbon::parse($employment->from)->format('d.m.Y');
+            if ($employment->to)
+            {
+                $employment->to = Carbon::parse($employment->to)->format('d.m.Y');
+            }
+            else $employment->to = 'aktuell';
+        }
         $employments = $this->formatDescription($employments);
 
         return view('solid-state.employments')
