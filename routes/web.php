@@ -15,7 +15,6 @@ use App\Http\Controllers\PortfolioController;
 */
 
 Route::get('/', [PortfolioController::class, 'index'])->name('home');
-Route::get('/cv', [PortfolioController::class, 'cv'])->name('cv');
 
 
 Route::get('/generic', function () {
@@ -30,6 +29,8 @@ Route::get('/portfolio', [PortfolioController::class, 'info'])->name('portfolio'
 Route::get('/skills', [PortfolioController::class, 'skills'])->name('skills');
 Route::get('/projects', [PortfolioController::class, 'projects'])->name('projects');
 Route::get('/employments', [PortfolioController::class, 'employments'])->name('employments');
+Route::get('/cv', [PortfolioController::class, 'cv'])->name('cv');
+
 
 Route::post('/send_mail', [PortfolioController::class, 'sendMail'])->name('send_mail');
 

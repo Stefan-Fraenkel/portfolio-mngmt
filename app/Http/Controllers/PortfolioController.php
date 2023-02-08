@@ -19,7 +19,10 @@ use App\Models\TrainingDescription;
 use App\Models\Tag;
 use App\Models\Profile;
 use App\Models\ProfileImage;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Storage;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 
 class PortfolioController extends Controller
@@ -39,6 +42,26 @@ class PortfolioController extends Controller
             ->with('expertises', Expertise::all()->where('advertise', true)->take(5)->values()) // get max 5 entries to not clutter layout
             ->with('employments', $employments->values()) // ->values() to reset collection keys
             ->with('projects', $projects->values());
+    }
+
+    public function cv()
+    {
+
+
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadHTML(view('solid-state.index')
+            ->with('profile', Profile::first())
+            ->with('employments', $this->formatDescription(Employment::all()->where('advertise', true)->take(3)->values()))
+            ->with('trainings', Training::all()->where('advertise', true)->take(3)->values()) // get max 3 entries to not clutter layout
+            ->with('expertises', Expertise::all()->where('advertise', true)->take(5)->values()) // get max 5 entries to not clutter layout
+            ->with('projects', $this->formatDescription(Project::all()->where('advertise', true)->take(4)->values())->values())
+            );
+        $pdf->setPaper('a4', 'portrait');
+
+        return $pdf->stream('barcode'.'.pdf');
+        $pdf = Pdf::loadView('solid-state.elements', '');
+        return $pdf->download('invoice.pdf');
+        return view('solid-state.cv');
     }
 
     private function formatDescription($collection)
