@@ -136,7 +136,11 @@
                         <article>
                             <a href="#" class="image"><img src="data:image/png;base64,{{$project->image}}" alt="" /></a>
                             <h3 class="major">{{$project->name}}</h3>
-                            <p>{!!$project->short_description!!}</p>
+                            @foreach($project->short_descriptions as $short_description)
+                                {{$short_description}}
+                                <br>
+                            @endforeach
+                            <br>
                             <a href="{{$project->url}}" class="special" target="_blank">mehr erfahren</a>
                         </article>
                     @endforeach
