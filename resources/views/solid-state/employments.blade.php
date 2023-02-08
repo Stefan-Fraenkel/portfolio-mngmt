@@ -19,7 +19,7 @@
 
 				<!-- Header -->
 					<header id="header">
-                        <h1><a href="{{route('home')}}">{{$profile->name}}</a></h1>
+                        <h1><a href="{{route('home')}}">zur Startseite</a></h1>
 						<nav>
 							<a href="#menu">Menu</a>
 						</nav>
